@@ -1,0 +1,30 @@
+import { Document, PopulatedDoc, Types } from 'mongoose';
+import { IProduct } from './IProduct.model.interface.js';
+
+
+export interface IOrderItem {
+    productId: PopulatedDoc<IProduct>;
+    name: string;
+    quantity: number;
+    priceAtPurchase: number;
+    customizations?: string;
+}
+
+export interface IPaymentDetails {
+    transactionId: string;
+    paymentMethod: 'UPI' | 'Stripe' | 'Cash at Counter' | 'Card';
+    status: 'Pending' | 'Paid' | 'Failed';
+}
+
+
+export interface IOrder extends Document {
+    tableNumber: string;
+    items: IOrderItem[];
+    totalAmount: number;
+    status: 'New' | 'Cooking' | 'Served' | 'Completed' | 'Cancelled';
+    paymentDetails: IPaymentDetails;
+    customerName?: string | null;
+    orderTime: Date;
+    createdAt: Date;
+    updatedAt: Date;
+}

@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Model, Schema } from 'mongoose';
 import { IProduct } from '../interfaces/Model/IProduct.model.interface.js';
 
 const ProductSchema: Schema<IProduct> = new Schema(
@@ -75,6 +75,6 @@ ProductSchema.pre('save', function (next: any) {
   next();
 });
 
-const Product = mongoose.models.Product || mongoose.model('Product', ProductSchema);
+const Product = mongoose.models.Product || mongoose.model<IProduct>('Product', ProductSchema);
 
 export default Product;
