@@ -23,8 +23,20 @@ const OrderSchema = new Schema<IOrder>(
       default: 'New',
     },
     paymentDetails: {
+      orderId: {
+        type: String,
+        required: true,
+      },
       transactionId: { type: String, required: true },
       paymentMethod: { type: String, required: true },
+      signature: {
+        type: String,
+        default: null,
+      },
+      description: {
+        tyope: String,
+        default: null,
+      },
       status: { type: String, required: true },
     },
     customerName: { type: String, default: null },

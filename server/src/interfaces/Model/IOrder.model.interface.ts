@@ -10,9 +10,13 @@ export interface IOrderItem {
 }
 
 export interface IPaymentDetails {
+  orderId: string | null;
   transactionId: string;
   paymentMethod: 'UPI' | 'Stripe' | 'Cash at Counter' | 'Card';
   status: 'Pending' | 'Paid' | 'Failed';
+  signature: string | null;
+  description?: string | null;
+
 }
 
 export interface IOrder extends Document {
