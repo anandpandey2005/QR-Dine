@@ -11,6 +11,7 @@ const CategorySchema = new Schema<ICategory>(
     name: {
       type: String,
       required: true,
+      default: null,
     },
     isActive: {
       type: Boolean,

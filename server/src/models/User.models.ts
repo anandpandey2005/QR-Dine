@@ -3,40 +3,29 @@ import { IUser } from '../interfaces/Model/IUser.model.interface.js';
 
 const UserSchema = new Schema<IUser>(
   {
-    name: {
-      first: {
-        type: String,
-        default: null,
-      },
-      last: {
-        type: String,
-        default: null,
-      },
+    fullname: {
+      type: String,
+      required: true,
+      trim: true,
+      default: '',
     },
     gender: {
       type: String,
-      default: null,
+      enum: ['M', 'F', 'O', ''],
+      default: '',
     },
     dob: {
       type: Date,
       default: null,
     },
     gmail: {
-      address: { type: String, required: [true, 'gmail mandatory.'] },
-      isVerified: { type: Boolean, default: false },
+      type: String,
+      required: true,
+      default: ''
     },
     phone: {
-      countryCode: { type: String, default: '+91' },
-      number: { type: String, default: null },
-      isVerified: { type: Boolean, default: false },
-    },
-    otp: {
       type: String,
-      default: null,
-    },
-    otpExpiry: {
-      type: Date,
-      default: null,
+      default: '',
     },
     orders: [
       {

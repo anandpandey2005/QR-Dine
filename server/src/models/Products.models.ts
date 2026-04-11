@@ -37,10 +37,11 @@ const ProductSchema = new Schema<IProduct>(
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Category',
+      required: true,
     },
     rating: {
       type: Number,
-      default: 5,
+      default: null,
       min: [0, 'Rating cannot be below 0'],
       max: [5, 'Rating cannot be above 5'],
       set: (v: number) => parseFloat(v.toFixed(1)),
@@ -61,6 +62,14 @@ const ProductSchema = new Schema<IProduct>(
       type: String,
       default: '',
     },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now,
+    }
   },
   {
     timestamps: true,

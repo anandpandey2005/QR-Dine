@@ -12,18 +12,18 @@ export interface IOrderItem {
 export interface IPaymentDetails {
   orderId: string | null;
   transactionId: string;
-  paymentMethod: 'UPI' | 'Stripe' | 'Cash at Counter' | 'Card';
-  status: 'Pending' | 'Paid' | 'Failed';
-  signature: string | null;
+  paymentMethod: string;
+  status: string;
+  signature?: string | null;
   description?: string | null;
 
 }
 
 export interface IOrder extends Document {
-  tableNumber: string;
+  tableNumber: string | null;
   items: IOrderItem[];
   totalAmount: number;
-  status: 'New' | 'Cooking' | 'Served' | 'Completed' | 'Cancelled';
+  status?: 'New' | 'Cooking' | 'Served' | 'Completed' | 'Cancelled';
   paymentDetails: IPaymentDetails;
   customerName?: string | null;
   orderTime: Date;

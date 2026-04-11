@@ -5,4 +5,5 @@ export interface IOtp extends Document {
     userId: PopulatedDoc<IUser>;
     otp: number;
     createdAt: Date;
+    updatedAt: Date;
 };

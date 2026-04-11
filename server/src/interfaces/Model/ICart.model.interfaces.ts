@@ -3,11 +3,11 @@ import { IUser } from './IUser.model.interface.js';
 import { IProduct } from './IProduct.model.interface.js';
 
 export interface ICart extends Document {
-  userId: PopulatedDoc<IUser> | null;
+  userId?: PopulatedDoc<IUser> | null;
   items: {
     productId: PopulatedDoc<IProduct>;
     quantity: number;
-    customizations: string;
+    customizations?: string;
     priceSnapshot: number;
   }[];
   totalAmount: number;

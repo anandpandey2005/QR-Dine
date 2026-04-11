@@ -6,6 +6,7 @@ const OrderSchema = new Schema<IOrder>(
     tableNumber: {
       type: String,
       required: true,
+      default: null,
     },
     items: [
       {
@@ -26,6 +27,7 @@ const OrderSchema = new Schema<IOrder>(
       orderId: {
         type: String,
         required: true,
+        default : null,
       },
       transactionId: { type: String, required: true },
       paymentMethod: { type: String, required: true },
