@@ -3,6 +3,8 @@ import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
 import rootRouter from './routes/index.routes.js';
+import productRoutes from './routes/product.routes.js';
+import { routesDocumentation } from '../public/routesDocuments.js'
 const app: Application = express();
 
 // GLOBAL MIDDLEWARE
@@ -34,7 +36,7 @@ app.get('/health', (req: Request, res: Response) => {
 // Routes
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('hello');
+  res.send(routesDocumentation);
 });
 
 app.use('/api/v1', rootRouter);
