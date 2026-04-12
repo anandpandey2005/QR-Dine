@@ -16,7 +16,6 @@ export interface IPaymentDetails {
   status: string;
   signature?: string | null;
   description?: string | null;
-
 }
 
 export interface IOrder extends Document {

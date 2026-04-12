@@ -11,7 +11,7 @@ const OrderSchema = new Schema<IOrder>(
       type: String,
       enum: ['Dine-In', 'Takeaway'],
       required: true,
-      default: 'Dine-In'
+      default: 'Dine-In',
     },
     tokenNumber: {
       type: String,
@@ -36,7 +36,7 @@ const OrderSchema = new Schema<IOrder>(
       orderId: {
         type: String,
         required: true,
-        default : null,
+        default: null,
       },
       transactionId: { type: String, required: true },
       paymentMethod: { type: String, required: true },

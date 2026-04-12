@@ -19,7 +19,7 @@ const TableSchema = new Schema<ITable>(
     updatedAt: {
       type: Date,
       default: Date.now,
-    }
+    },
   },
   { timestamps: true },
 );

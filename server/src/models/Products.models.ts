@@ -69,7 +69,7 @@ const ProductSchema = new Schema<IProduct>(
     updatedAt: {
       type: Date,
       default: Date.now,
-    }
+    },
   },
   {
     timestamps: true,

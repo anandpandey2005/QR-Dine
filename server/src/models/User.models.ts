@@ -4,7 +4,6 @@ import { IUser } from '../interfaces/Model/IUser.model.interface.js';
 const UserSchema = new Schema<IUser>(
   {
     userId: {
-
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'User',
@@ -27,7 +26,7 @@ const UserSchema = new Schema<IUser>(
     gmail: {
       type: String,
       required: true,
-      default: ''
+      default: '',
     },
     phone: {
       type: String,
@@ -51,13 +50,13 @@ const UserSchema = new Schema<IUser>(
       type: String,
       enum: ['customer', 'manager', 'chef', 'groundStaff'],
       required: true,
-      default: 'customer'
+      default: 'customer',
     },
     roleModel: {
       type: String,
       enum: ['CustomerProfile', 'ManagerProfile', 'ChefProfile', 'GroundStaffProfile'],
       required: true,
-      default: 'CustomerProfile'
+      default: 'CustomerProfile',
     },
     profile: {
       type: mongoose.Schema.Types.ObjectId,
