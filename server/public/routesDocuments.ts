@@ -4,12 +4,14 @@ export const routesDocumentation: any =
     "apiRoutes": {
         "auth": [
             { "method": "POST", "path": "/api/auth/login", "description": "Staff login (Manager, Chef, Ground Staff)" },
+            { "method": "POST", "path": "/api/auth/registertion", "description": "user registration" },
             { "method": "POST", "path": "/api/auth/logout", "description": "Invalidate session" },
             { "method": "POST", "path": "/api/auth/forgot-password", "description": "send reset link on their email" },
             { "method": "POST", "path": "/api/auth/reset-password", "description": "update password" },
         ],
         "otp": [
             { "method": "POST", "path": "/api/otp/send", "description": "Send OTP to customer email" },
+            { "method": "POST", "path": "/api/otp/resend", "description": "Send OTP to customer email" },
             { "method": "POST", "path": "/api/otp/verify", "description": "Verify OTP and create customer session token" }
         ],
         "Category": [

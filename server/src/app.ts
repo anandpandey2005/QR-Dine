@@ -1,13 +1,13 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser'
 import helmet from 'helmet';
 import compression from 'compression';
 import rootRouter from './routes/index.routes.js';
 import productRoutes from './routes/product.routes.js';
 import { routesDocumentation } from '../public/routesDocuments.js';
-import { number } from 'zod';
-const app: Application = express();
 
+const app: Application = express();
 // GLOBAL MIDDLEWARE
 
 app.use(helmet());
@@ -28,7 +28,9 @@ app.use(
 app.use(compression());
 
 app.use(express.json({ limit: '10mb' }));
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
 
 app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ status: 'OK', uptime: process.uptime() });
