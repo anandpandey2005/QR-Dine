@@ -17,6 +17,10 @@ export interface IUser extends Document {
   isSubscribe?: boolean;
   theme?: 'light' | 'dark' | 'system';
   isLoggedin: boolean;
+  accessToken: string;
+  refreshToken: string;
   createdAt: Date;
   updatedAt: Date;
+  generateAccessToken(): string;
+  generateRefreshToken(): string;
 }

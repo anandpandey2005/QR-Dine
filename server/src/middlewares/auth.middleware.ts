@@ -15,19 +15,25 @@ export interface AuthRequest extends Request {
 
 export const requireAuth = (req: AuthRequest, res: Response, next: NextFunction): void => {
     try {
-        const authHeader = req.headers.authorization || req?.cookies?.token;
+        let token: string | undefined;
 
-        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
+            token = req.headers.authorization.split(' ')[1];
+        } else if (req.cookies && (req.cookies.token || req.cookies.accessToken)) {
+            token = req.cookies.token || req.cookies.accessToken;
+        }
+
+        if (!token) {
             res.status(401).json({ message: "You are not logged in. Please log in to get access." });
             return;
         }
 
-        const token = authHeader.split(' ')[1];
-
-        if (!process.env.ACCESS_TOKEN_SECRET) {
+        const secret = process.env.ACCESS_TOKEN_SECRET || process.env.ACCESS_TOKEN || process.env.JWT_SECRET;
+        if (!secret) {
             throw new Error("ACCESS_TOKEN_SECRET is not defined in environment variables");
         }
-        const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET) as DecodedToken;
+
+        const decoded = jwt.verify(token, secret) as DecodedToken;
         req.user = {
             _id: decoded.userId,
             role: decoded.role

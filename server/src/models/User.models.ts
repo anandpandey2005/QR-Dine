@@ -1,6 +1,6 @@
 import mongoose, { Model, Schema } from 'mongoose';
 import { IUser } from '../interfaces/Model/IUser.model.interface.js';
-
+import jwt from 'jsonwebtoken'
 const UserSchema = new Schema<IUser>(
   {
     userId: {
@@ -76,9 +76,39 @@ const UserSchema = new Schema<IUser>(
       type: Boolean,
       default: false,
     },
+    accessToken: {
+      type: String,
+      default: ''
+    },
+    refreshToken: {
+      type: String,
+      default: ''
+    },
   },
   { timestamps: true },
 );
+UserSchema.methods.generateAccessToken = function (this: IUser): string {
+  const secret = process.env.ACCESS_TOKEN_SECRET as string;
+  return jwt.sign(
+    {
+      userId: this._id,
+      role: this.role
+    },
+    secret as string,
+    { expiresIn: (process.env.ACCESS_TOKEN_EXPIRY as string || '1d') as any }
+  );
+};
+
+UserSchema.methods.generateRefreshToken = function (this: IUser): string {
+  const secret = process.env.REFRESH_TOKEN_SECRET as string;
+  return jwt.sign(
+    {
+      userId: this._id
+    },
+    secret as string,
+    { expiresIn: (process.env.REFRESH_TOKEN_EXPIRY as string || '30d') as any }
+  );
+};
 
 const User = mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
 export default User;
