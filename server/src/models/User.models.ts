@@ -1,14 +1,17 @@
 import mongoose, { Model, Schema } from 'mongoose';
 import { IUser } from '../interfaces/Model/IUser.model.interface.js';
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+
 const UserSchema = new Schema<IUser>(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'User',
+      ref: 'UserId',
+      index: true,
+      unique: true,
     },
-    fullname: {
+    fullName: {
       type: String,
       required: true,
       trim: true,
@@ -27,10 +30,12 @@ const UserSchema = new Schema<IUser>(
       type: String,
       required: true,
       default: '',
+      unique: [true, 'Already gmail exists in our database'],
     },
     phone: {
       type: String,
       default: '',
+      unique: [true, 'Already phone number exists in our database']
     },
     orders: [
       {
@@ -70,7 +75,7 @@ const UserSchema = new Schema<IUser>(
     theme: {
       type: String,
       enum: ['light', 'dark', 'system'],
-      default: 'dark',
+      default: 'light',
     },
     isLoggedin: {
       type: Boolean,
@@ -92,7 +97,11 @@ UserSchema.methods.generateAccessToken = function (this: IUser): string {
   return jwt.sign(
     {
       userId: this._id,
-      role: this.role
+      role: this.role,
+      isSubscribe: this.isSubscribe,
+      isLoggedin: this.isLoggedin,
+      gmail: this.gmail,
+      phone: this.phone,
     },
     secret as string,
     { expiresIn: (process.env.ACCESS_TOKEN_EXPIRY as string || '1d') as any }

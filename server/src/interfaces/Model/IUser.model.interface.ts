@@ -1,14 +1,16 @@
 import mongoose, { Document, Types, PopulatedDoc } from 'mongoose';
 import { ICart } from './ICart.model.interfaces.js';
 import { IOrder } from './IOrder.model.interface.js';
+import { IUserId } from '../../models/UserId.models.js';
 
 export interface IUser extends Document {
-  userId: Types.ObjectId;
-  fullname: string;
+  userId: PopulatedDoc<IUserId>;
+  fullName: string;
   gender?: string;
   dob?: Date | null;
   gmail: string;
   phone?: string;
+  password?: string;
   orders?: PopulatedDoc<IOrder>[] | null;
   cart?: PopulatedDoc<ICart>[] | null;
   role: 'customer' | 'manager' | 'chef' | 'groundStaff';
@@ -23,4 +25,5 @@ export interface IUser extends Document {
   updatedAt: Date;
   generateAccessToken(): string;
   generateRefreshToken(): string;
+  isPasswordCorrect(password: string): Promise<boolean>;
 }
