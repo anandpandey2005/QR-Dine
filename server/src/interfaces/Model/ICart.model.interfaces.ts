@@ -1,4 +1,4 @@
-import { Document, PopulatedDoc } from 'mongoose';
+import { Types, Document, PopulatedDoc } from 'mongoose';
 import { IUser } from './IUser.model.interface.js';
 import { IProduct } from './IProduct.model.interface.js';
 

@@ -1,7 +1,7 @@
 import { Document, Types, PopulatedDoc } from 'mongoose';
-import { IUser } from './IUser.model.interface.js';
+import { IUserId } from '../../models/UserId.models.js';
 export interface IOtp extends Document {
-  userId: PopulatedDoc<IUser>;
+  userId: PopulatedDoc<IUserId>;
   otp: number;
   createdAt: Date;
   updatedAt: Date;
