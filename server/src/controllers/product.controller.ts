@@ -1,128 +1,64 @@
 import { Request, Response } from "express";
 import Product from "../models/Products.models.js";
+import { normalizeName } from "../utils/normalization.utils.js";
+import Category from "../models/Category.models.js";
 
+export const addProduct = async (req: Request, res: Response) => {
+    let { name, ingredients = [], regularPrice, todayPrice, category, stock, underOffer, isVegetarian, note } = req?.body || {};
+    if (!name || regularPrice === undefined || todayPrice === undefined || !category) {
+        return res.status(400).json({ success: false, message: "Unexpected empty value" });
+    }
 
-// @api/v1/product/post/getProduct
+    if (typeof regularPrice !== "number" || typeof todayPrice !== "number") {
+        return res.status(400).json({ success: false, message: "regularPrice and todayPrice must be numbers" });
+    }
 
-// {
-//   "category": ["64a5c3f8e9f12d0045abc123"],
-//   "filter": {
-//     "vegetarian": true,
-//     "priceRange": { "min": 100, "max": 500 },
-//     "underOffer": true,
-//     "inStock": true,
-//     "minRating": 3,
-//     "sort": "lowToHigh"
-//   },
-//   "show": { "limit": 20, "page": 2 }
-// }
-
-export const getProduct = async (req: Request, res: Response) => {
-    const { category = [], filter = {}, show = { limit: 20, page: 1 } } = req?.body || {};
+    name = normalizeName(name);
+    category = normalizeName(category);
+    note = normalizeName(note);
 
     try {
+        const category_ = await Category.findOneAndUpdate({ name: category }, { name: category }, { upsert: true, new: true });
+        const newProduct = new Product({
+            name,
+            ingredients,
+            regularPrice,
+            todayPrice,
+            category: category_._id,
+            stock,
+            underOffer,
+            isVegetarian,
+            note,
+        });
 
-        let query: any = {};
+        const savedProduct = await newProduct.save();
+        return res.status(201).json({
+            success: true,
+            message: "Product added successfully",
+            data: savedProduct,
+        });
 
-        if (category && category.length > 0) {
-            query.category = { $in: category };
-        }
-
-        // Price filter - using todayPrice
-        if (filter?.priceRange) {
-            const { min, max } = filter.priceRange;
-            if (min !== undefined && max !== undefined) {
-                query.todayPrice = { $gte: min, $lte: max };
-            } else if (min !== undefined) {
-                query.todayPrice = { $gte: min };
-            } else if (max !== undefined) {
-                query.todayPrice = { $lte: max };
-            }
-        }
-
-        // Veg filter
-        if (filter?.vegetarian !== undefined) {
-            query.isVegetarian = filter.vegetarian;
-        }
-
-        // Under offer filter
-        if (filter?.underOffer) {
-            query.underOffer = true;
-        }
+    } catch (error: any) {
+        return res.status(500).json({ success: false, message: error.message || "something got wrong while saving file in database" });
+    }
+};
 
 
-        // In stock filter
-        if (filter?.inStock) {
-            query.stock = { $gt: 0 };
-        }
+export const getProduct = async (req: Request, res: Response) => {
 
-        // Minimum rating filter
-        if (filter?.minRating !== undefined && filter.minRating > 0) {
-            query.rating = { $gte: filter.minRating };
-        }
-        query.isActive = true;
-
-        const limit = Math.max(1, show?.limit || 20);
-        const page = Math.max(1, show?.page || 1);
-        const skip = (page - 1) * limit;
-
-
-        // Sorting - using todayPrice
-        let sortOption: any = {};
-        if (filter?.sort) {
-            switch (filter.sort) {
-                case "lowToHigh":
-                    sortOption = { todayPrice: 1 };
-                    break;
-                case "highToLow":
-                    sortOption = { todayPrice: -1 };
-                    break;
-                case "newest":
-                    sortOption = { createdAt: -1 };
-                    break;
-                case "topRated":
-                    sortOption = { rating: -1 };
-                    break;
-                default:
-                    sortOption = { createdAt: -1 };
-            }
-        } else {
-            sortOption = { createdAt: -1 };
-        }
-
-
-        const data = await Product.find(query)
-            .sort(sortOption)
-            .skip(skip)
-            .limit(limit);
-
-
-        const total = await Product.countDocuments(query);
-
+    try {
+        const data = await Product.find({ isActive: true })
         if (data.length === 0) {
             return res.status(200).json({
                 success: true,
-                message: "No products found matching your criteria.",
+                message: "No products found.",
                 data: [],
-                pagination: {
-                    total: 0,
-                    page: page,
-                    limit: limit,
-                    totalPages: 0
-                }
             });
         }
-
         return res.status(200).json({
             success: true,
             message: `${data.length} records fetched successfully.`,
             data: data,
-            pagination: {
-                total: total,
-                page: page,
-                limit: limit,
-                totalPages: Math.ceil(total / limit)
-            }
         });
 
     } catch (error: any) {
@@ -133,8 +69,6 @@ export const getProduct = async (req: Request, res: Response) => {
     }
 }
 
-// _id = ["anfkcbksh4354rfs" , "38yrfhvnishakbhv"]
-// @api/v1/product/delete/_id
 export const deleteProduct = async (req: Request, res: Response) => {
 
     const { _id = [] } = req.body || {};
@@ -172,9 +106,6 @@ export const deleteProduct = async (req: Request, res: Response) => {
     }
 }
 
-
-// _id = ["anfkcbksh4354rfs" , "38yrfhvnishakbhv"]
-// @api/v1/product/manage-active/_id
 export const manageActiveStatus = async (req: Request, res: Response) => {
     const { _ids = [], isActive = true } = req?.body || {};
 
