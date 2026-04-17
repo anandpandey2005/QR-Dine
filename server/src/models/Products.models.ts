@@ -58,6 +58,10 @@ const ProductSchema = new Schema<IProduct>(
       type: Boolean,
       default: true,
     },
+    isVegetarian: {
+      type: Boolean,
+      default: false,
+    },
     note: {
       type: String,
       default: '',

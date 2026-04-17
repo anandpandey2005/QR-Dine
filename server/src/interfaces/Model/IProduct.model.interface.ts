@@ -13,6 +13,7 @@ export interface IProduct extends Document {
   stock?: number | null;
   underOffer?: boolean;
   isActive?: boolean;
+  isVegetarian?: boolean;
   note?: string;
   createdAt: Date;
   updatedAt: Date;
