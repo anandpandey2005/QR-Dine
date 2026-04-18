@@ -29,6 +29,6 @@ jobs:
           if git diff --quiet && git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "chore: daily heartbeat update [skip ci]"
+            git commit -m "daily update"
             git push
           fi
