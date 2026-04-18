@@ -1,0 +1,34 @@
+name: count day
+
+on:
+  schedule:
+    - cron: '00 22 * * *'
+  workflow_dispatch: 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Update last_updated.txt
+        run: |
+          echo "update : $(date)" > last_updated.txt
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "anandpandey20005@gmail.com"
+          git config --local user.name "ANAND PANDEY"
+          git add last_updated.txt
+          # Only commit if there are actual changes to avoid workflow errors
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: daily heartbeat update [skip ci]"
+            git push
+          fi
