@@ -1,5 +1,6 @@
 import mongoose, { Model, Schema } from 'mongoose';
-import { ICart } from '../interfaces/Model/ICart.model.interfaces.js';
+import { ICart, ICartItem } from '../interfaces/Model/ICart.model.interfaces.js';
+import { NextFunction } from 'express';
 
 const CartSchema = new Schema<ICart>(
   {
@@ -42,35 +43,27 @@ const CartSchema = new Schema<ICart>(
   { timestamps: true },
 );
 
-CartSchema.pre('save', async function (next: any) {
-  const cart = this as any;
+CartSchema.pre('save', async function () {
+  const cart = this as ICart & { items: ICartItem[] };
+  const Product = mongoose.model('Product');
 
-  try {
-    const Product = mongoose.model('Product');
-
-    await Promise.all(
-      cart.items.map(async (item: any) => {
-        const product = await Product.findById(item.productId);
-        if (product) {
-          item.priceSnapshot = product.todayPrice;
-        }
-      }),
-    );
-    next();
-  } catch (err: any) {
-    next(err);
-  }
+  await Promise.all(
+    cart.items.map(async (item: ICartItem) => {
+      const product = await Product.findById(item.productId);
+      if (product) {
+        item.priceSnapshot = product.todayPrice;
+      }
+    }),
+  );
 });
 
-CartSchema.pre('save', function (next: any) {
-  const cart = this as any;
+CartSchema.pre('save', function () {
+  const cart = this as ICart & { items: ICartItem[] };
 
-  cart.totalAmount = cart.items.reduce((total: number, item: any) => {
+  cart.totalAmount = cart.items.reduce((total: number, item: ICartItem) => {
     const price = item.priceSnapshot || 0;
     return total + price * item.quantity;
   }, 0);
-
-  next();
 });
 
 const Cart = mongoose.models.Cart || mongoose.model<ICart>('Cart', CartSchema);

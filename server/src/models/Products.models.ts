@@ -1,6 +1,7 @@
 import mongoose, { Model, Schema } from 'mongoose';
 import { IProduct } from '../interfaces/Model/IProduct.model.interface.js';
 
+
 const ProductSchema = new Schema<IProduct>(
   {
     name: {
@@ -10,8 +11,14 @@ const ProductSchema = new Schema<IProduct>(
     },
     images: [
       {
-        type: String,
-        default: [],
+        secure_url: {
+          type: String,
+          default: ''
+        },
+        public_id: {
+          type: String,
+          default: ''
+        },
       },
     ],
     ingredients: [

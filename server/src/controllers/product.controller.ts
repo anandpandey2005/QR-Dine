@@ -3,6 +3,7 @@ import Product from "../models/Products.models.js";
 import { normalizeName } from "../utils/normalization.utils.js";
 import Category from "../models/Category.models.js";
 
+
 export const addProduct = async (req: Request, res: Response) => {
     let { name, ingredients = [], regularPrice, todayPrice, category, stock, underOffer, isVegetarian, note } = req?.body || {};
     if (!name || regularPrice === undefined || todayPrice === undefined || !category) {
@@ -139,5 +140,54 @@ export const manageActiveStatus = async (req: Request, res: Response) => {
             success: false,
             message: error.message || "Internal Server Error"
         });
+    }
+}
+
+export const updateProduct = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const updateData: any = {};
+
+    try {
+        if (req.body.name !== undefined) {
+            updateData.name = normalizeName(req.body.name);
+        }
+        if (req.body.category !== undefined) {
+            const categoryName = normalizeName(req.body.category);
+            const category_ = await Category.findOneAndUpdate({ name: categoryName }, { name: categoryName }, { upsert: true, new: true });
+            updateData.category = category_._id;
+        }
+        if (req.body.note !== undefined) {
+            updateData.note = normalizeName(req.body.note);
+        }
+
+        const allowedFields = ['ingredients', 'regularPrice', 'todayPrice', 'rating', 'stock', 'underOffer', 'isActive', 'isVegetarian'];
+        allowedFields.forEach(field => {
+            if (req.body[field] !== undefined) {
+                updateData[field] = req.body[field];
+            }
+        });
+
+        if (Object.keys(updateData).length === 0) {
+            return res.status(400).json({ success: false, message: "No valid fields provided for update" });
+        }
+
+        const updatedProduct = await Product.findOneAndUpdate(
+            { _id: id },
+            { $set: updateData },
+            { new: true }
+        );
+
+        if (!updatedProduct) {
+            return res.status(404).json({ success: false, message: "Product not found or inactive" });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Product updated successfully",
+            data: updatedProduct,
+        });
+
+    } catch (error: any) {
+        return res.status(500).json({ success: false, message: error.message || "Something went wrong while updating the product in database" });
     }
 }

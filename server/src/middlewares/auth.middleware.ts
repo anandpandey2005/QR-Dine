@@ -1,5 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import User from '../models/User.models.js';
+import { PopulatedDoc } from 'mongoose';
+import { ICart } from '../interfaces/Model/ICart.model.interfaces.js';
+import { IOrder } from '../interfaces/Model/IOrder.model.interface.js';
+import { IUserId } from '../models/UserId.models.js';
+
 
 interface DecodedToken {
     userId: string;
@@ -12,17 +18,33 @@ interface DecodedToken {
 
 export interface AuthRequest extends Request {
     user?: {
-        _id: string;
-        role: string;
+        userId: PopulatedDoc<IUserId>;
+        fullName: string;
+        gender?: string;
+        dob?: Date | null;
         gmail: string;
-        phone: string;
-        isSubscribe: boolean;
+        phone?: string;
+        password?: string;
+        orders?: PopulatedDoc<IOrder>[] | null;
+        cart?: PopulatedDoc<ICart>[] | null;
+        role: 'customer' | 'manager' | 'chef' | 'groundStaff';
+        roleModel: 'CustomerProfile' | 'ManagerProfile' | 'ChefProfile' | 'GroundStaffProfile';
+        profile?: PopulatedDoc<Document> | null;
+        isSubscribe?: boolean;
+        theme?: 'light' | 'dark' | 'system';
         isLoggedin: boolean;
+        accessToken: string;
+        refreshToken: string;
+        createdAt: Date;
+        updatedAt: Date;
+        generateAccessToken(): string;
+        generateRefreshToken(): string;
+        isPasswordCorrect(password: string): Promise<boolean>;
 
     };
 }
 
-export const requireAuth = (req: AuthRequest, res: Response, next: NextFunction): void => {
+export const requireAuth = async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
         let token: string | undefined;
 
@@ -43,18 +65,19 @@ export const requireAuth = (req: AuthRequest, res: Response, next: NextFunction)
         }
 
         const decoded = jwt.verify(token, secret) as DecodedToken;
-        req.user = {
-            _id: decoded.userId,
-            role: decoded.role,
-            gmail: decoded.gmail,
-            phone: decoded.phone,
-            isLoggedin: decoded.isLoggedin,
-            isSubscribe: decoded.isSubscribe,
-        };
+
+
+        const userget: any = await User.findById(decoded.userId)
+
+        if (!userget) {
+            throw new Error("Something went wrong ")
+        }
+
+        req.user = userget;
         next();
 
-    } catch (error) {
-        res.status(401).json({ message: "Invalid or expired token. You are not logged in." });
+
+    } catch (error: any) {
+        return res.status(401).json({ success: false, message: error.message || "Invalid or expired token. You are not logged in." });
     }
 };
-

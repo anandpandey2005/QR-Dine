@@ -3,7 +3,10 @@ import { ICategory } from './ICategory.models.interface.js';
 
 export interface IProduct extends Document {
   name: string;
-  images?: string[];
+  images?: {
+    secure_url: string;
+    public_id: string;
+  };
   ingredients?: string[];
   regularPrice: number;
   todayPrice: number;
