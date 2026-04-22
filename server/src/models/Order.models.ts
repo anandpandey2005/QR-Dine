@@ -24,13 +24,18 @@ const OrderSchema = new Schema<IOrder>(
         quantity: { type: Number, required: true },
         priceAtPurchase: { type: Number, required: true },
         customizations: { type: String, default: '' },
+        status: {
+          type: String,
+          enum: ['placed', 'Cooking', 'ready to server', 'Completed', 'Cancelled', 'served'],
+          default: 'placed',
+        }
       },
     ],
     totalAmount: { type: Number, required: true },
     status: {
       type: String,
-      enum: ['New', 'Cooking', 'Served', 'Completed', 'Cancelled'],
-      default: 'New',
+      enum: ['placed', 'Cooking', 'ready to server', 'Completed', 'Cancelled', 'served'],
+      default: 'placed',
     },
     paymentDetails: {
       orderId: {
@@ -45,7 +50,7 @@ const OrderSchema = new Schema<IOrder>(
         default: null,
       },
       description: {
-        tyope: String,
+        type: String,
         default: null,
       },
       status: { type: String, required: true },

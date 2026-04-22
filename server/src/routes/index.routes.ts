@@ -10,6 +10,7 @@ import customerRoutes from './customer.routes.js';
 import otpRoutes from './otp.routes.js';
 import categoryRoutes from './category.routes.js';
 import paymentRoutes from './payment.routes.js';
+import kdsRoutes from './kds.routes.js';
 
 const rootRouter = Router();
 
@@ -24,5 +25,6 @@ rootRouter.use('/order', orderRoutes);
 rootRouter.use('/otp', otpRoutes);
 rootRouter.use('/category', categoryRoutes);
 rootRouter.use('/payment', paymentRoutes);
+rootRouter.use('/kds', kdsRoutes);
 
 export default rootRouter;
