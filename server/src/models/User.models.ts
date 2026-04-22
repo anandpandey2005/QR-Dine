@@ -35,7 +35,7 @@ const UserSchema = new Schema<IUser>(
     phone: {
       type: String,
       default: '',
-      unique: [true, 'Already phone number exists in our database']
+      unique: [true, 'Already phone number exists in our database'],
     },
     orders: [
       {
@@ -83,11 +83,11 @@ const UserSchema = new Schema<IUser>(
     },
     accessToken: {
       type: String,
-      default: ''
+      default: '',
     },
     refreshToken: {
       type: String,
-      default: ''
+      default: '',
     },
   },
   { timestamps: true },
@@ -104,7 +104,7 @@ UserSchema.methods.generateAccessToken = function (this: IUser): string {
       phone: this.phone,
     },
     secret as string,
-    { expiresIn: (process.env.ACCESS_TOKEN_EXPIRY as string || '1d') as any }
+    { expiresIn: ((process.env.ACCESS_TOKEN_EXPIRY as string) || '1d') as any },
   );
 };
 
@@ -112,10 +112,10 @@ UserSchema.methods.generateRefreshToken = function (this: IUser): string {
   const secret = process.env.REFRESH_TOKEN_SECRET as string;
   return jwt.sign(
     {
-      userId: this._id
+      userId: this._id,
     },
     secret as string,
-    { expiresIn: (process.env.REFRESH_TOKEN_EXPIRY as string || '30d') as any }
+    { expiresIn: ((process.env.REFRESH_TOKEN_EXPIRY as string) || '30d') as any },
   );
 };
 

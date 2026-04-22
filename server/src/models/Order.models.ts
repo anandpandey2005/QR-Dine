@@ -28,7 +28,7 @@ const OrderSchema = new Schema<IOrder>(
           type: String,
           enum: ['placed', 'Cooking', 'ready to server', 'Completed', 'Cancelled', 'served'],
           default: 'placed',
-        }
+        },
       },
     ],
     totalAmount: { type: Number, required: true },

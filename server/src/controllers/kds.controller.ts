@@ -1,4 +1,4 @@
-import { extractUpdatingData } from "../utils/extractUpdatignData.utils.js";
+import { extractUpdatingData } from '../utils/extractUpdatignData.utils.js';
 
 /* 
 - view order at real time (socket io fro boradcast)
@@ -7,4 +7,3 @@ import { extractUpdatingData } from "../utils/extractUpdatignData.utils.js";
 - update order based on otp 
 - set active status 
  */
-
