@@ -1,0 +1,54 @@
++__________+   S   E   R   V   E   R   +__________+
+
+role = [user , chef , groundStaff , manager]
+
++___ NOTE : ____+ --> first i try to complete all the CRUD operation in this project : 
+
+=========
+User
+==========
+
+#profile 
+-- new creating
+-- modify / update
+-- logout (it's not crud op)
+-- deltete
+
+#cart 
+-- add item in a cart
+-- update cart item by their quanttity and the customization ( include remove one also)
+
+#order
+-- make order
+-- update order (including cancellatio / reShip) this is optional one
+
+=========
+chef
+==========
+#profile 
+-- loging
+-- modify / update (over on allowed acccess)
+-- logout (it's not crud op)
+
+=========
+groundstaff
+==========
+#profile 
+- loging
+- modify / update (over on allowed acccess)
+- logout (it's not crud op)
+-manage order
+
+=========
+manager
+==========
+#profile
+-update / modify (based on multi-level authorization on each step)
+-manage employees
+--add/remove/update employees 
+-manage employees salary
+-- one click by that all employees get their salary after calculate manually or auto
+-manage inventory 
+-add/remove/update (with their content or status/flag)
+-manage table 
+-gave claearance if something got stuck and not cleard by groundstaff
