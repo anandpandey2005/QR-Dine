@@ -6,9 +6,8 @@ interface ProtectedProps {
   };
 }
 
-const ProtectedComponent = ({ isAuthenticated }: ProtectedProps) => {
- 
-  return isAuthenticated.loggedIn ? (
+const ProtectedComponent = (props: ProtectedProps) => {
+  return props.isAuthenticated.loggedIn ? (
     <Outlet />
   ) : (
     <Navigate to="/" replace />

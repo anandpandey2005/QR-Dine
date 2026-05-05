@@ -21,13 +21,13 @@ export default function Landingpage() {
           alt="Hero Food"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-[#F8FAFC]" />
+        <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/20 to-[#F8FAFC]" />
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 text-center">
           <p className="text-orange-500 font-black tracking-[0.3em] text-sm md:text-xl mb-2 uppercase drop-shadow-md">
             Welcome to
           </p>
-          <h1 className="text-[15vw] md:text-[12rem] font-[1000] leading-[0.8] tracking-tighter text-white uppercase break-words">
+          <h1 className="text-[15vw] md:text-[12rem] font-[1000] leading-[0.8] tracking-tighter text-white uppercase wrap-break-words">
             {storeName.split(" ")[0]}
             <br />
             <span className="text-orange-500 inline-block drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
@@ -47,7 +47,7 @@ export default function Landingpage() {
               <Utensils className="text-white w-8 h-8" />
             </div>
             <div>
-              <h2 className="text-3xl font-[900] tracking-tight text-slate-800 uppercase">
+              <h2 className="text-3xl font-black tracking-tight text-slate-800 uppercase">
                 Dine-In
               </h2>
               <p className="text-slate-400 font-bold italic tracking-wide">
@@ -69,7 +69,7 @@ export default function Landingpage() {
               <ShoppingBag className="text-white w-8 h-8" />
             </div>
             <div>
-              <h2 className="text-3xl font-[900] tracking-tight text-white uppercase">
+              <h2 className="text-3xl font-black tracking-tight text-white uppercase">
                 Takeaway
               </h2>
               <p className="text-slate-500 font-bold italic tracking-wide">

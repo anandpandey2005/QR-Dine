@@ -1,15 +1,39 @@
 import "./App.css";
-import { Landingpage, NavbarComponent } from "./handler";
+import {
+  BackButton,
+  Landingpage,
+  NavbarComponent,
+  ProfilePage,
+  Menupage,
+} from "./handler";
+import { Route, Routes } from "react-router-dom";
+
 const App = () => {
+  const data = {
+    userId: "hello",
+    fullName: "anand",
+    Gender: "M",
+    gmail: "anandpandey20005@gmail.com",
+    role: "user",
+  };
+
   return (
-    <>
-      <section className="w-full bg-zinc-300">
-        <NavbarComponent></NavbarComponent>
-        <div className="relative max-w-lg mx-auto h-auto m-0  overflow-hidden bg-[#f1f1f1]">
-          <Landingpage></Landingpage>
-        </div>
-      </section>
-    </>
+    <div className="max-w-lg mx-auto bg-zinc-300 min-h-screen">
+      <NavbarComponent />
+      <BackButton></BackButton>
+      <Routes>
+        <Route path="/me" element={<ProfilePage props={data} />} />
+        <Route path="/menu" element={<Menupage />} />
+        <Route
+          path="/"
+          element={
+            <div className="relative max-w-lg mx-auto h-auto m-0 overflow-hidden bg-[#f1f1f1]">
+              <Landingpage />
+            </div>
+          }
+        />
+      </Routes>
+    </div>
   );
 };
 
