@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 const UserSchema = new Schema<IUser>(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       required: true,
       ref: 'UserId',
       index: true,
@@ -19,8 +19,8 @@ const UserSchema = new Schema<IUser>(
     },
     gender: {
       type: String,
-      enum: ['M', 'F', 'O', ''],
-      default: '',
+      enum: ['M', 'F', 'O', null],
+      default: null,
     },
     dob: {
       type: Date,

@@ -1,1 +1,19 @@
-@import 'tailwindcss'
+:root {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: 100;
+  letter-spacing: 3px;
+  line-height: auto;
+  background-color: #0f0f0f;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

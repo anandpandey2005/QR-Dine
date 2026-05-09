@@ -17,7 +17,7 @@ const NavbarComponent = () => {
         </button>
       </div>
 
-      <div className="flex items-center justify-between bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border border-white/20 px-6 py-3 rounded-4xl shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
+      <div className="flex items-center justify-between bg-white/80 backdrop-blur-xl border border-white/20 px-6 py-3 rounded-4xl shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
         <div className="flex w-2/5 justify-around items-center">
           <Link
             to="/menu"

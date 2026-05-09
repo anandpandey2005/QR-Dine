@@ -1,3 +1,5 @@
 export { default as ProtectedComponent } from './ProtectedComponent.tsx'
-export { default as NavbarComponent } from './public/NavbarComponent.tsx'
-export { default as BackButton} from './public/BackButton.tsx'
+export { default as NavbarComponent } from './public/Navbar.tsx'
+export { default as BackButton } from './public/BackButton.tsx'
+export { default as Advertisementbanner } from './public/Advertisementbanner.tsx'
+export { default as CategoryChip } from './public/CategoryChip.tsx'

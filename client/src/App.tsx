@@ -9,7 +9,13 @@ import {
 import { Route, Routes } from "react-router-dom";
 
 const App = () => {
-  const data = {
+  const data: {
+    userId: string;
+    fullName: string;
+    Gender: "M" | "F" | "O";
+    gmail: string;
+    role: string;
+  } = {
     userId: "hello",
     fullName: "anand",
     Gender: "M",
