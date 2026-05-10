@@ -1,4 +1,4 @@
-import { User, ClipboardList, Coffee, Search, ScanLine } from "lucide-react";
+import { User, ClipboardList, Coffee, Utensils, ScanLine, UtensilsCrossed } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const NavbarComponent = () => {
@@ -36,14 +36,14 @@ const NavbarComponent = () => {
             </Link>
 
             <Link
-              to="/search"
-              className={`group flex flex-col items-center gap-1 transition-all ${isActive("/search") ? "text-blue-600" : "text-zinc-400 hover:text-zinc-600"}`}
+              to="/tray"
+              className={`group flex flex-col items-center gap-1 transition-all ${isActive("/tray") ? "text-blue-600" : "text-zinc-400 hover:text-zinc-600"}`}
             >
-              <Search
+              <UtensilsCrossed
                 size={20}
-                className={`${isActive("/search") ? "scale-110" : "group-hover:-translate-y-0.5"} transition-all`}
+                className={`${isActive("/tray") ? "scale-110" : "group-hover:-translate-y-0.5"} transition-all`}
               />
-              <span className="text-[10px] font-bold tracking-tight">Search</span>
+              <span className="text-[10px] font-bold tracking-tight">Tray</span>
             </Link>
           </div>
 

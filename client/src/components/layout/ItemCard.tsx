@@ -1,14 +1,14 @@
 import { Star } from "lucide-react";
 import AddButton from "../common/button/AddButton";
 
-const ItemCard = ({ 
-  name = "Classic Margherita", 
-  ingredients = "Fresh mozzarella, tomato sauce, basil, olive oil", 
+const ItemCard = ({
+  name = "Classic Margherita",
+  ingredients = "Fresh mozzarella, tomato sauce, basil, olive oil",
   price = "12.99",
   originalPrice = "15.99",
   rating = 4.5,
   reviews = 120,
-  image = import.meta.env.VITE_DEFAULT_IMAGE 
+  image = import.meta.env.VITE_DEFAULT_IMAGE,
 }) => {
   return (
     <div className="group w-full bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col h-full">
@@ -19,7 +19,7 @@ const ItemCard = ({
           alt={name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        
+
         {/* Discount Badge */}
         {originalPrice && (
           <div className="absolute top-3 left-3 bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded-lg uppercase tracking-wider shadow-lg">
@@ -42,11 +42,12 @@ const ItemCard = ({
             {name}
           </h3>
         </div>
-        
-        <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed flex-grow">
-          {ingredients}
-        </p>
-
+        <div className="flex flex-col gap-1 text-xs tracking-normal">
+          <p className="font-bold">ingredients:</p>
+          <p className="text-xs  text-slate-500 line-clamp-3 leading-relaxed flex-grow overflow-auto tracking-normal">
+            {ingredients}
+          </p>
+        </div>
         {/* Action Area */}
         <div className="pt-3 flex items-center justify-between border-t border-slate-50 mt-auto">
           <div className="flex flex-col">
@@ -57,7 +58,7 @@ const ItemCard = ({
               ₹{price}
             </span>
           </div>
-          
+
           <AddButton />
         </div>
       </div>
