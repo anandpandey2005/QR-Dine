@@ -11,7 +11,7 @@ const NavbarComponent = () => {
       <div className="relative w-full max-w-md">
         {/* Floating Action Button (Center) */}
         <div className="absolute left-1/2 -top-6 -translate-x-1/2 z-20">
-          <button className="group flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg shadow-blue-500/40 transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-blue-500 ring-[5px] ring-slate-50 dark:ring-zinc-900">
+          <button className="group flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/40 transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-primary-light ring-[5px] ring-slate-50 dark:ring-zinc-900">
             <ScanLine
               size={24}
               className="group-hover:rotate-12 transition-transform"
@@ -26,7 +26,7 @@ const NavbarComponent = () => {
           <div className="flex w-[42%] justify-around items-center">
             <Link
               to="/menu"
-              className={`group flex flex-col items-center gap-1 transition-all ${isActive("/menu") ? "text-blue-600" : "text-zinc-400 hover:text-zinc-600"}`}
+              className={`group flex flex-col items-center gap-1 transition-all ${isActive("/menu") ? "text-primary" : "text-zinc-400 hover:text-zinc-600"}`}
             >
               <Coffee
                 size={20}
@@ -37,7 +37,7 @@ const NavbarComponent = () => {
 
             <Link
               to="/tray"
-              className={`group flex flex-col items-center gap-1 transition-all ${isActive("/tray") ? "text-blue-600" : "text-zinc-400 hover:text-zinc-600"}`}
+              className={`group flex flex-col items-center gap-1 transition-all ${isActive("/tray") ? "text-primary" : "text-zinc-400 hover:text-zinc-600"}`}
             >
               <UtensilsCrossed
                 size={20}
@@ -54,7 +54,7 @@ const NavbarComponent = () => {
           <div className="flex w-[42%] justify-around items-center">
             <Link
               to="/orders"
-              className={`group flex flex-col items-center gap-1 transition-all ${isActive("/orders") ? "text-blue-600" : "text-zinc-400 hover:text-zinc-600"}`}
+              className={`group flex flex-col items-center gap-1 transition-all ${isActive("/orders") ? "text-primary" : "text-zinc-400 hover:text-zinc-600"}`}
             >
               <ClipboardList
                 size={20}
@@ -65,7 +65,7 @@ const NavbarComponent = () => {
 
             <Link
               to="/me"
-              className={`group flex flex-col items-center gap-1 transition-all ${isActive("/me") ? "text-blue-600" : "text-zinc-400 hover:text-zinc-600"}`}
+              className={`group flex flex-col items-center gap-1 transition-all ${isActive("/me") ? "text-primary" : "text-zinc-400 hover:text-zinc-600"}`}
             >
               <User
                 size={20}

@@ -50,7 +50,7 @@ const ProfilePage = ({ props }: ProfileProps) => {
           type="button"
           onClick={isEditing ? handleSave : () => setIsEditing(true)}
           className={`absolute -bottom-6 right-8 p-4 rounded-full shadow-2xl transition-all active:scale-90 z-20 border-4 border-gray-50 ${
-            isEditing ? "bg-blue-600 text-white" : "bg-white text-zinc-800"
+            isEditing ? "bg-primary text-white" : "bg-white text-zinc-800"
           }`}
         >
           {isEditing ? <Check size={22} /> : <Edit3 size={22} />}
@@ -79,7 +79,7 @@ const ProfilePage = ({ props }: ProfileProps) => {
               </label>
               <div className="relative">
                 <User
-                  className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${isEditing ? "text-blue-500" : "text-zinc-300"}`}
+                  className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${isEditing ? "text-primary" : "text-zinc-300"}`}
                 />
                 <input
                   name="fullName"
@@ -89,7 +89,7 @@ const ProfilePage = ({ props }: ProfileProps) => {
                   onChange={handleChange}
                   className={`w-full rounded-2xl py-3.5 pl-12 pr-4 transition-all duration-300 outline-none border-2 ${
                     isEditing
-                      ? "bg-white border-blue-100 ring-4 ring-blue-50/50 text-zinc-800 shadow-sm"
+                      ? "bg-white border-[#dbeafe] ring-4 ring-[#dbeafe]/50 text-zinc-800 shadow-sm"
                       : "bg-zinc-50/50 border-transparent text-zinc-500 cursor-default"
                   }`}
                 />
@@ -101,7 +101,7 @@ const ProfilePage = ({ props }: ProfileProps) => {
               </label>
               <div className="relative">
                 <Mail
-                  className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${isEditing ? "text-blue-500" : "text-zinc-300"}`}
+                  className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${isEditing ? "text-primary" : "text-zinc-300"}`}
                 />
                 <input
                   name="gmail"
@@ -111,7 +111,7 @@ const ProfilePage = ({ props }: ProfileProps) => {
                   onChange={handleChange}
                   className={`w-full rounded-2xl py-3.5 pl-12 pr-4 transition-all duration-300 outline-none border-2 ${
                     isEditing
-                      ? "bg-white border-blue-100 ring-4 ring-blue-50/50 text-zinc-800 shadow-sm"
+                      ? "bg-white border-[#dbeafe] ring-4 ring-[#dbeafe]/50 text-zinc-800 shadow-sm"
                       : "bg-zinc-50/50 border-transparent text-zinc-500 cursor-default"
                   }`}
                 />
@@ -128,7 +128,7 @@ const ProfilePage = ({ props }: ProfileProps) => {
                     name="gender"
                     value={formData.gender}
                     onChange={handleChange}
-                    className="w-full bg-white border-2 border-blue-100 ring-4 ring-blue-50/50 rounded-2xl py-3.5 px-4 text-zinc-800 outline-none appearance-none cursor-pointer"
+                    className="w-full bg-white border-2 border-[#dbeafe] ring-4 ring-[#dbeafe]/50 rounded-2xl py-3.5 px-4 text-zinc-800 outline-none appearance-none cursor-pointer"
                   >
                     <option value="M">Male</option>
                     <option value="F">Female</option>

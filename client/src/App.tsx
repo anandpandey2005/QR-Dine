@@ -6,6 +6,7 @@ import {
   ProfilePage,
   Menupage,
   Traypage,
+  Orderpage,
 } from "./handler";
 import { Route, Routes } from "react-router-dom";
 
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/me" element={<ProfilePage props={data} />} />
         <Route path="/menu" element={<Menupage />} />
         <Route path="/tray" element={<Traypage />} />
+        <Route path="/orders" element={<Orderpage />} />
         <Route
           path="/"
           element={

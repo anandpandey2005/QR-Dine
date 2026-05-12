@@ -28,7 +28,7 @@ const Menupage = () => {
 
   return (
     <div className="max-w-lg mx-auto bg-[#f1f1f2] min-h-screen">
-      <h1 className="text-2xl text-center font-semibold px-4 pt-6 bg-blue-500 pb-5 rounded-b-[50%]">
+      <h1 className="text-2xl text-center font-semibold px-4 pt-6 bg-primary-light pb-5 rounded-b-[50%]">
         Menu
       </h1>
 
