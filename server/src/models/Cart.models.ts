@@ -8,6 +8,7 @@ const CartSchema = new Schema<ICart>(
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: false,
+      index: true,
     },
     items: [
       {
