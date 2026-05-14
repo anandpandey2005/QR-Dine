@@ -1,3 +1,10 @@
+/*
+--> get cart
+--> add 
+
+*/
+
+
 import { Request, Response } from 'express';
 import { AuthRequest } from '../middlewares/auth.middleware.js';
 import Cart from '../models/Cart.models.js';

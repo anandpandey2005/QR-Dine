@@ -1,5 +1,6 @@
 import { Document, PopulatedDoc, Types } from 'mongoose';
 import { ICategory } from './ICategory.models.interface.js';
+import { IUser } from './IUser.model.interface.js';
 
 export interface IProduct extends Document {
   name: string;
@@ -18,6 +19,7 @@ export interface IProduct extends Document {
   isActive?: boolean;
   isVegetarian?: boolean;
   note?: string;
+  boughtBy: PopulatedDoc<IUser>[];
   createdAt: Date;
   updatedAt: Date;
 }

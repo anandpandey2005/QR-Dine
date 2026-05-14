@@ -26,9 +26,9 @@ const CartItem = ({
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto bg-white border-b border-primary-light p-4 transition-all overflow-auto rounded-2xl ">
+    <div className="w-full max-w-lg mx-auto mb-1 bg-white  p-4 transition-all overflow-auto rounded-2xl ">
       <div className="flex gap-4 items-start">
-        <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0">
+        <div className="relative w-20 h-20 sm:w-24 sm:h-30 flex-shrink-0">
           <img
             src={item?.image || defaultImage}
             alt={item?.name}
@@ -49,6 +49,13 @@ const CartItem = ({
             </button>
           </div>
 
+          {/* ingredients */}
+          <div className="flex flex-col gap-1 text-xs tracking-normal">
+            <p className="font-bold">ingredients:</p>
+            <p className="text-xs  text-slate-500 line-clamp-3 leading-relaxed flex-grow overflow-auto tracking-normal">
+              hello , onoon
+            </p>
+          </div>
           <div className="flex items-center gap-3 mb-3">
             <p className="text-[14px] text-gray-500 font-medium">
               ₹{item?.price?.toFixed(2)}

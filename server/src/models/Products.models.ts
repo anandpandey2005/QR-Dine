@@ -1,5 +1,6 @@
 import mongoose, { Model, Schema } from 'mongoose';
 import { IProduct } from '../interfaces/Model/IProduct.model.interface.js';
+import User from './User.models.js';
 
 const ProductSchema = new Schema<IProduct>(
   {
@@ -52,6 +53,12 @@ const ProductSchema = new Schema<IProduct>(
       max: [5, 'Rating cannot be above 5'],
       set: (v: number) => parseFloat(v.toFixed(1)),
     },
+    boughtBy: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      }
+    ],
     stock: {
       type: Number,
       default: null,
