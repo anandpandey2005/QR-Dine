@@ -1,7 +1,13 @@
 /*
 --> get cart
---> add 
-
+--> add product in a cart
+--> remove product from a cart
+--> remove all the product from the cart
+--> update the quantity of a  product in a cart (inc / dec)
+--> add / remmove customization in an cart
+--> move to order
+--> after successfull flow it moves into an order schemas
+--> final run when place order clean the cart 
 */
 
 
