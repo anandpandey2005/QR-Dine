@@ -29,7 +29,7 @@ const CartSchema = new Schema<ICart>(
         },
         priceSnapshot: {
           type: Number,
-          required: true,
+          default: null,
           min: [0, 'Price cannot be negative'],
           set: (v: number) => parseFloat(v.toFixed(2)),
         },
